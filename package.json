@@ -1,0 +1,44 @@
+{
+  "name": "decisions",
+  "version": "1.0.0",
+  "description": "App for decisions",
+  "main": "main.js",
+  "build": {
+    "appId": "com.yourcompany.decisions",
+    "productName": "Decisions",
+    "files": [
+      "main.js",
+      "preload.js",
+      "preset-storage.js",
+      "presets.json",
+      "client/dist/client/browser/**/*"
+    ],
+    "extraResources": [
+      "presets.json"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "include": "uninstaller.nsh"
+    }
+  },
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "build:client": "cd client && npm run build",
+    "build:electron": "electron-builder",
+    "dist": "npm run build:client && npm run build:electron"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "electron": "^28.1.0",
+    "electron-builder": "^24.13.2"
+  }
+}

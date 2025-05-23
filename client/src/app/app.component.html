@@ -1,0 +1,67 @@
+<div class="container">
+  <h1>Decisions...</h1>
+
+  <div class="form-row">
+    <input
+      [(ngModel)]="inputItem"
+      (keydown)="onInputKeydown($event)"
+      placeholder="Add an item..."
+    />
+    <button (click)="addItem()">Add</button>
+    <button (click)="newPreset()">New</button>
+  </div>
+
+  <ul *ngIf="itemList.length > 0">
+    <li *ngFor="let item of itemList; let i = index" @fadeIn>
+      {{ item }}
+      <button class="delete-item" (click)="removeItem(i)">×</button>
+    </li>
+  </ul>
+
+  <div class="form-row button-row">
+  <button (click)="startRoll()" [disabled]="itemList.length < 1 || isRolling">
+    Open Case
+  </button>
+  <button (click)="revealWinner()" [disabled]="itemList.length < 1 || isRolling">
+    Reveal Winner
+  </button>
+</div>
+
+  <div class="case-container" *ngIf="isRolling">
+    <div class="cursor"></div>
+    <div
+      class="case-strip"
+      [ngClass]="{ 'with-transition': transitionEnabled }"
+      [style.transform]="transformStyle"
+    >
+      <span *ngFor="let item of rollingItems">{{ item }}</span>
+    </div>
+  </div>
+
+  <div class="result" *ngIf="!isRolling && selectedItem">
+    <div class="confetti">🎉</div>
+    <div class="result-text">
+      You got: <span>{{ selectedItem }}</span>
+    </div>
+  </div>
+
+  <div class="preset-panel">
+    <input [(ngModel)]="presetName" placeholder="Name preset..." />
+    <button (click)="savePreset()">Add Preset</button>
+    <button (click)="updatePreset()" [disabled]="!activePreset">Update Preset</button>
+
+    <h3>PRESETS:</h3>
+    <div class="preset-list">
+      <span *ngFor="let key of getPresetKeys()" class="preset-item" @fadeIn>
+        <button
+          class="preset-button"
+          [class.active]="activePreset === key"
+          (click)="loadPreset(key)"
+        >
+          {{ key }}
+          <span class="x-overlay" (click)="deletePreset(key)">×</span>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
