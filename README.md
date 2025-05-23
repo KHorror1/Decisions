@@ -18,6 +18,7 @@ Built by **KHorror**
 
 ```bash
 npm install
+npm install --save-dev electron-builder
 cd client
 npm install
 cd ..
