@@ -9,6 +9,9 @@ A desktop app built with **Angular + Electron + Express** to help you spin a ran
 - Animated random picker with clean UI
 
 Built by **KHorror**
+Special thanks to: 
+Anci (https://github.com/anapoklukar)
+Blojz (https://github.com/blazgrilj)
 
 ---
 
