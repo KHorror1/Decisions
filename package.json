@@ -1,6 +1,6 @@
 {
   "name": "decisions",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "App for decisions",
   "main": "main.js",
   "build": {
@@ -17,7 +17,8 @@
       "presets.json"
     ],
     "directories": {
-      "buildResources": "build"
+      "buildResources": "build",
+      "output": "dist"
     },
     "win": {
       "target": "nsis"
@@ -29,10 +30,12 @@
     }
   },
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
+    "start": "cd client && npm start",
+    "electron": "electron .",
     "build:client": "cd client && npm run build",
     "build:electron": "electron-builder",
-    "dist": "npm run build:client && npm run build:electron"
+    "electron:build": "npm run build:client && npm run build:electron",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
     "express": "^4.21.2"
