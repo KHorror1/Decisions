@@ -1,67 +1,104 @@
-/* Container */
+/* === Base Layout (Shared Across Themes) === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .container {
   text-align: center;
   margin: 2rem auto;
   max-width: 1000px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0 1rem;
 }
 
-/* Header */
 h1 {
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #333;
+  margin-bottom: 2rem;
 }
 
-.button-row {
-  justify-content: center;
-  gap: 0.75rem; /* consistent spacing between buttons */
-  margin-bottom: 1rem;
-}
-
-/* Form row */
-.form-row {
+/* Align input and buttons in a row */
+.item-input-group {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin: 1rem auto;
+  max-width: 700px;
+  padding: 0 1rem;
 }
 
-input {
-  padding: 10px;
+/* Shared Input & Button Layout */
+.item-input-group input,
+input,
+.preset-panel input {
+  padding: 10px 14px;
   font-size: 16px;
-  flex: 1 1 300px;
-  max-width: 400px;
+  flex: 2 1 400px;
+  min-width: 250px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  margin: 0;
+  height: 42px;
+  box-sizing: border-box;
 }
 
-button:hover {
-  opacity: 0.9;
+.item-input-group button,
+button,
+.preset-panel button {
+  height: 42px;
+  padding: 0 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0.25rem;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FIXED: Exclude delete buttons from hover animation */
+button:hover:not(.delete-item):not(.x-overlay) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
   transform: scale(0.97);
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007acc;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button:disabled {
-  background-color: #999;
+  opacity: 0.6;
   cursor: not-allowed;
+  background: #ccc;
+  color: #555;
+  box-shadow: none;
 }
 
-/* List */
+.theme-toggle {
+  margin: 1rem 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid;
+}
+
+/* List Layout */
 ul {
   list-style: none;
   padding: 0;
@@ -70,29 +107,49 @@ ul {
 }
 
 li {
-  background-color: #f3f3f3;
-  padding: 10px 1.5rem 10px 10px;
+  padding: 10px 48px 10px 10px; /* 48px on the right to make room for the × */
   margin: 5px 0;
   border-radius: 4px;
   position: relative;
   text-align: left;
   font-size: 1rem;
+  border-left: 6px solid;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-/* Delete item button */
+
 .delete-item {
   position: absolute;
+  top: 0;
+  bottom: 0;
   right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: #e00;
-  font-size: 1.2rem;
+  margin: auto 0;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #222;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Case container */
+
+.delete-item:hover {
+  background-color: #ff4d4d;
+  color: white;
+  border-color: #ff4d4d;
+  box-shadow: 0 0 6px rgba(255, 77, 77, 0.5);
+}
+
+/* Spinner Layout */
 .case-container {
   position: relative;
   width: 100%;
@@ -100,32 +157,28 @@ li {
   height: 120px;
   margin: 2rem auto;
   overflow: hidden;
-  border: 4px solid #333;
+  border: 4px solid;
   border-radius: 12px;
-  background-color: #0e0e0e;
 }
 
-/* Strip of items */
 .case-strip {
-  display: flex;                     /* aligns the items in a row */
-  height: 100%;                      /* fills the case-container vertically */
-  align-items: center;              /* centers the text vertically */
-  gap: 1rem;                         /* space between items */
-  padding-left: 50%;                /* creates illusion of center strip starting mid-scroll */
-  transform: translateX(0);         /* default scroll state, updated dynamically via Angular */
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 50%;
+  transform: translateX(0);
 }
 
 .case-strip span {
   font-size: 1.25rem;
-  background-color: #2e2e2e;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  color: #fff;
   white-space: nowrap;
   min-width: 120px;
-  max-width: 120px;              /* Restrict width */
-  overflow: hidden;              /* Hide overflow */
-  text-overflow: ellipsis;       /* Add "..." for long text */
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
   box-shadow: 0 0 5px #000;
 }
@@ -134,24 +187,35 @@ li {
   transition: transform 3.5s cubic-bezier(0.15, 0.85, 0.25, 1);
 }
 
-/* Cursor */
 .cursor {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
   width: 4px;
-  background-color: red;
   transform: translateX(-50%);
   z-index: 10;
 }
 
-/* Result */
 .result {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #2ecc71;
   margin-top: 20px;
+}
+
+.result-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 12px;
+  margin-top: 1.5rem;
+  border: 2px dashed;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 /* Preset Panel */
@@ -159,27 +223,69 @@ li {
   margin-top: 2rem;
   padding: 20px;
   border-radius: 12px;
-  background-color: #f9f9f9;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.preset-panel input {
-  padding: 6px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  width: 60%;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+/* Preset Input Form with Buttons on the Right */
+.preset-form-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin: 1rem auto 2rem;
+  max-width: 700px;
+  padding: 0 1rem;
 }
 
-.preset-panel button {
-  margin-left: 8px;
+.preset-form-inline input {
+  flex: 1 1 auto;
+  min-width: 250px;
+  max-width: 600px;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  height: 42px;
+  box-sizing: border-box;
 }
 
-/* Preset list styles */
+.preset-form-inline .preset-form-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.preset-form-inline .preset-form-buttons button {
+  height: 42px;
+  padding: 0 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Preset Title */
+.preset-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: inherit;
+}
+
+/* Preset List */
 .preset-list {
   display: flex;
   flex-wrap: wrap;
@@ -193,33 +299,25 @@ li {
   position: relative;
 }
 
-/* Pill-style preset button */
 .preset-button {
   border-radius: 9999px;
   font-weight: 500;
   padding: 6px 16px;
-  background-color: #f0f0f0;
-  color: #333;
-  border: 1px solid #ccc;
   position: relative;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin: 0.25rem;
 }
 
 .preset-button.active {
-  background-color: #007bff;
-  color: white;
-  border: 2px solid orange;
+  border: 2px solid;
 }
 
+/* Delete (X) Overlay */
 .x-overlay {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #fff;
-  color: #666;
-  border: 1px solid #ccc;
   border-radius: 50%;
   font-size: 11px;
   width: 16px;
@@ -228,68 +326,95 @@ li {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  z-index: 2;
 }
 
-.x-overlay:hover {
-  background: #f8d7da;
-  color: #a00;
-  border-color: #a00;
+.delete-item:focus {
+  outline: none;
+  box-shadow: none;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
 }
 
-.empty-state {
-  font-style: italic;
-  color: #777;
-  text-align: center;
-  margin-top: 20px;
+.item-list-wrapper {
+  max-height: 240px; /* ~5 items at 48px each */
+  overflow-y: auto;
+  margin: 1rem auto;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background: inherit;
+  padding-right: 4px; /* space for scrollbar */
 }
 
-.result {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: pop-in 0.3s ease-out;
+.item-list-wrapper::-webkit-scrollbar {
+  width: 6px;
 }
 
-.confetti {
-  font-size: 2.5rem;
-  animation: confetti-bounce 1s ease-in-out infinite;
+.item-list-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
-.result-text {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #27ae60;
-  background: #eafaf1;
-  padding: 0.5rem 1.5rem;
-  border-radius: 12px;
-  margin-top: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 2px dashed #27ae60;
+.item-text {
+  display: inline-block;
+  max-width: calc(100% - 48px); /* leave space for the X button */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }
 
-.result-text span {
-  color: #1a8d4c;
+.selected-item {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-@keyframes pop-in {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.cursor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: red;
 }
 
-@keyframes confetti-bounce {
+.remove-winner-button {
+  margin-top: 1rem;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.remove-winner-button:hover {
+  background-color: #e60000;
+  transform: translateY(-1px);
+}
+
+.confetti-icon {
+  font-size: 3rem;
+  animation: bounce 1.2s infinite ease-in-out;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+@keyframes bounce {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-15px);
   }
 }

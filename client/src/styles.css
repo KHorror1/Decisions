@@ -1,1 +1,210 @@
-/* You can add global styles to this file, and also import other style files */
+/* === Theme Styling Only (Global Base) === */
+
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.light-theme {
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+/* Inputs */
+body.dark-theme input,
+body.dark-theme .preset-panel input {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+body.light-theme input,
+body.light-theme .preset-panel input {
+  background-color: #ffffff !important;
+  color: #222 !important;
+  border-color: #ccc !important;
+}
+
+/* Button Base for Both Themes */
+body.dark-theme button,
+body.dark-theme .theme-toggle {
+  background: #3a3a3a !important;
+  color: #f0f0f0 !important;
+  border: 1px solid #555 !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3) !important;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease !important;
+}
+
+body.light-theme button,
+body.light-theme .theme-toggle {
+  background: #e0e0e0 !important;
+  color: #222 !important;
+  border: 1px solid #bbb !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease !important;
+}
+
+/* Preset Buttons */
+body.dark-theme .preset-panel button {
+  background: #444 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+
+body.light-theme .preset-panel button {
+  background: #f0f0f0 !important;
+  color: #000 !important;
+  border: 1px solid #ccc !important;
+}
+
+/* Hover */
+body.dark-theme button:hover:not(.delete-item):not(.x-overlay),
+body.dark-theme .preset-panel button:hover,
+body.dark-theme .theme-toggle:hover {
+  background-color: #555 !important;
+  box-shadow: 0 0 12px rgba(103, 211, 194, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+body.light-theme button:hover:not(.delete-item):not(.x-overlay),
+body.light-theme .preset-panel button:hover,
+body.light-theme .theme-toggle:hover {
+  background-color: #dcdcdc !important;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Theme Toggle */
+body.dark-theme .theme-toggle {
+  color: #ffd700 !important;
+  border-color: #ffd700 !important;
+  font-weight: bold !important;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2) !important;
+}
+
+body.light-theme .theme-toggle {
+  color: #007acc !important;
+  border-color: #007acc !important;
+  font-weight: bold !important;
+  box-shadow: 0 0 10px rgba(0, 122, 204, 0.15) !important;
+}
+
+/* List Items */
+body.dark-theme li {
+  background-color: #1e2329 !important;
+  border-left-color: #4b5d9e !important;
+}
+
+body.light-theme li {
+  background-color: #fff !important;
+  border-left-color: #4b5d9e !important;
+}
+
+/* Spinner */
+body.dark-theme .case-container {
+  background-color: #000 !important;
+  border-color: #444 !important;
+}
+
+body.dark-theme .case-strip span {
+  background-color: #2c2c2c !important;
+  color: #f5f5f5 !important;
+}
+
+body.light-theme .case-container {
+  background-color: #fafafa !important;
+  border-color: #ccc !important;
+}
+
+body.light-theme .case-strip span {
+  background-color: #eee !important;
+  color: #222 !important;
+}
+
+/* Result */
+body.dark-theme .result-text {
+  background: #1b2f40 !important;
+  border-color: #4ba3c7 !important;
+  color: #4ba3c7 !important;
+}
+
+body.light-theme .result-text {
+  background: #e6f4fa !important;
+  border-color: #4ba3c7 !important;
+  color: #4ba3c7 !important;
+}
+
+/* Preset Panel */
+body.dark-theme .preset-panel {
+  background-color: #1a1a1a !important;
+  border: 1px solid #2b2b2b !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.light-theme .preset-panel {
+  background-color: #fff !important;
+  border: 1px solid #ddd !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Active Preset Button */
+body.dark-theme .preset-button.active {
+  background-color: #4c4c4c !important;
+  color: #f0f0f0 !important;
+  border: 2px solid #67d3c2 !important;
+  box-shadow: 0 0 8px rgba(103, 211, 194, 0.5) !important;
+}
+
+body.light-theme .preset-button.active {
+  background-color: #d0f0ea !important;
+  color: #222 !important;
+  border: 2px solid #67d3c2 !important;
+  box-shadow: 0 0 8px rgba(103, 211, 194, 0.4) !important;
+}
+
+/* X Button (preset) */
+body.dark-theme .x-overlay {
+  background: #111 !important;
+  color: #aaa !important;
+  border: 1px solid #333 !important;
+}
+
+body.dark-theme .x-overlay:hover {
+  background: #ff4d4d !important;
+  color: #fff !important;
+  border-color: #ff4d4d !important;
+}
+
+body.light-theme .x-overlay {
+  background: #f8f8f8 !important;
+  color: #444 !important;
+  border: 1px solid #ccc !important;
+}
+
+body.light-theme .x-overlay:hover {
+  background: #ff4d4d !important;
+  color: #fff !important;
+  border-color: #ff4d4d !important;
+}
+
+body.dark-theme .delete-item:hover {
+  background-color: #ff4d4d !important;
+  color: white !important;
+  border-color: #ff4d4d !important;
+  box-shadow: 0 0 6px rgba(255, 77, 77, 0.5) !important;
+}
+
+body.light-theme .delete-item:hover {
+  background-color: #ff4d4d !important;
+  color: white !important;
+  border-color: #ff4d4d !important;
+  box-shadow: 0 0 6px rgba(255, 77, 77, 0.5) !important;
+}
